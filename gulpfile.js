@@ -5,15 +5,19 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	sassLint = require('gulp-sass-lint');
 var ts = require("gulp-typescript");
-var tsProject = ts.createProject("tsconfig.json");
+var tsProject = ts.createProject('tsconfig.json');
+var browserify = require('browserify');
+var tsify = require('tsify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 var plumber = require('gulp-plumber');
+var eslint = require('gulp-eslint');
 var browserSync = require('browser-sync');
 var htmlInjector = require("bs-html-injector");
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 
 var concat = require('gulp-concat');
-var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 
 
@@ -66,26 +70,57 @@ gulp.task('styles', function () {
 		.pipe(browserSync.stream());
 });
 
-// Scripts Task
+// ESLint Task
+gulp.task('eslint', function () {
+	gulp.src('src/scripts/**/*.ts')
+		.pipe(eslint({
+			options: {
+				configFile: '.eslintrc'
+			}
+		}))
+		.pipe(eslint.format('stylish'));
+});
+
+// Scripts Task (experimental)
 gulp.task('scripts', function () {
-	gulp.src('src/scripts/*.ts')
+	return browserify()
+		.add('./src/scripts/main.ts')
+		.plugin(tsify)
+		.bundle()
 		.pipe(plumber({
 			errorHandler: function (error) {
 				console.log(error.message);
 				this.emit('end');
 			}
 		}))
-		// .pipe(jshint())
-		// .pipe(jshint.reporter('default'))
-		// .pipe(concat('main.js'))
-		// .pipe(rename({ suffix: '.min' }))
-		// .pipe(uglify())
-		// .pipe(gulp.dest('dist/scripts/'))
-		.pipe(browserSync.reload({ stream: true }))
-		return tsProject.src()
-        .pipe(tsProject())
-        .js.pipe(gulp.dest("dist/scripts/"));
+		.pipe(source('bundle.js'))
+		.pipe(buffer())
+		.pipe(gulp.dest('dist/scripts/'))
+		.pipe(browserSync.reload({
+			stream: true
+		}))
 });
+
+// Scripts Task (old)
+// gulp.task('scripts', function () {
+// 	gulp.src('src/scripts/main.ts')
+// 		.pipe(plumber({
+// 			errorHandler: function (error) {
+// 				console.log(error.message);
+// 				this.emit('end');
+// 			}
+// 		})) 
+// 		.pipe(jshint())
+// 		.pipe(jshint.reporter('default'))
+// 		.pipe(concat('main.js'))
+// 		.pipe(rename({ suffix: '.min' }))
+// 		.pipe(uglify())
+// 		.pipe(gulp.dest('dist/scripts/'))
+// 		.pipe(browserSync.reload({ stream: true }))
+// 		return tsProject.src()
+//         .pipe(tsProject())
+//         .js.pipe(gulp.dest("dist/scripts/"));
+// });
 
 // Default task
 gulp.task('default', ['browser-sync'], function () {
@@ -95,6 +130,7 @@ gulp.task('default', ['browser-sync'], function () {
 function defaultFunction() {
 	gulp.watch('src/scss/**/*.s+(a|c)ss', ['lint']);
 	gulp.watch('src/scss/**/*.scss', ['styles']);
+	gulp.watch('src/scripts/**/*.ts', ['eslint']);
 	gulp.watch('src/scripts/**/*.ts', ['scripts']);
 	gulp.watch('*.html', ['styles']);
 }

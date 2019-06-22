@@ -4,7 +4,6 @@
 @import 'resets/reset';
 
 // import assets
-@import 'assets/slick';
 
 // import vars
 @import 'vars/vars',
@@ -14,16 +13,7 @@
 @import 'base/base';
 
 // import elements
-@import 
-'elements/link',
-'elements/list',
-'elements/button';
-
 
 // import modules
-@import 
-'modules/general',
-'modules/counter',
-'modules/header',
-'modules/card-slider',
-'modules/bee';
+@import 'modules/menu',
+'modules/app';

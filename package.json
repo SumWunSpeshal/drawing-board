@@ -1,5 +1,5 @@
 {
-  "name": "frontend-dummy",
+  "name": "drawing-board",
   "version": "1.0.0",
   "description": "dummy",
   "main": "index.html",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SumWunSpeshal/frontend-dummy.git"
+    "url": "https://github.com/SumWunSpeshal/drawing-board.git"
   },
   "keywords": [
     "stuff"
@@ -17,22 +17,29 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jquery": "^3.3.29",
-    "browser-sync": "^2.26.3",
+    "@typescript-eslint/parser": "^1.10.2",
+    "babel-eslint": "^10.0.2",
+    "browser-sync": "^2.26.7",
+    "browserify": "^16.2.3",
     "bs-html-injector": "^3.0.3",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^6.0.0",
+    "gulp-autoprefixer": "^6.1.0",
     "gulp-cache": "0.2.8",
     "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^5.0.0",
     "gulp-jshint": "^2.1.0",
-    "gulp-plumber": "^1.2.0",
+    "gulp-plumber": "^1.2.1",
     "gulp-rename": "1.2.2",
     "gulp-sass": "^4.0.2",
     "gulp-sass-lint": "^1.4.0",
-    "gulp-typescript": "^5.0.0-alpha.3",
-    "gulp-uglify": "^3.0.1",
-    "jquery": "^3.3.1",
-    "jshint": "^2.9.6",
-    "typescript": "^3.1.6"
+    "gulp-typescript": "^5.0.1",
+    "gulp-uglify": "^3.0.2",
+    "jquery": "^3.4.1",
+    "jshint": "^2.10.2",
+    "tsify": "^4.0.1",
+    "typescript": "^3.5.2",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
     "slick-carousel": "^1.8.1"
