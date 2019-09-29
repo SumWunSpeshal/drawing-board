@@ -1,4 +1,4 @@
-export class Student {
+export class HoverScrollingText {
 
   private currentPosition: number = 0;
   private animationRunning: boolean = false;
@@ -13,7 +13,7 @@ export class Student {
   private initElements() {
     
     let self = this;
-    let scrollElement: NodeListOf<HTMLElement> = document.querySelectorAll('[data-horizontal-scroll]');
+    let scrollElement: NodeListOf<HTMLElement> = document.querySelectorAll('[data-horizontal-scroll-hover]');
 
     // repeat scrolling text mechanism for every instance on the page
     scrollElement.forEach((element: HTMLElement) => {
