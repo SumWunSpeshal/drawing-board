@@ -42,6 +42,8 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
-    "slick-carousel": "^1.8.1"
+    "foundation-sites": "^6.5.3",
+    "slick-carousel": "^1.8.1",
+    "what-input": "^5.2.4"
   }
 }

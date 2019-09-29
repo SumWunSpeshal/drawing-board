@@ -1,0 +1,22 @@
+body {
+  background: $primary-color;
+}
+
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  background: $white;
+  overflow: hidden;
+  padding: 100px 0;
+}
+
+.scrolling-text {
+  display: inline-block;
+  font-size: 24px;
+  font-family: 'Roboto', sans-serif;
+  color: $alert-color;
+
+  white-space: nowrap;
+
+
+}

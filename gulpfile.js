@@ -11,7 +11,6 @@ var tsify = require('tsify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var plumber = require('gulp-plumber');
-var eslint = require('gulp-eslint');
 var browserSync = require('browser-sync');
 var htmlInjector = require("bs-html-injector");
 var sass = require('gulp-sass');
@@ -70,17 +69,6 @@ gulp.task('styles', function () {
 		.pipe(browserSync.stream());
 });
 
-// ESLint Task
-gulp.task('eslint', function () {
-	gulp.src('src/scripts/**/*.ts')
-		.pipe(eslint({
-			options: {
-				configFile: '.eslintrc'
-			}
-		}))
-		.pipe(eslint.format('stylish'));
-});
-
 // Scripts Task (experimental)
 gulp.task('scripts', function () {
 	return browserify()
@@ -130,7 +118,6 @@ gulp.task('default', ['browser-sync'], function () {
 function defaultFunction() {
 	gulp.watch('src/scss/**/*.s+(a|c)ss', ['lint']);
 	gulp.watch('src/scss/**/*.scss', ['styles']);
-	gulp.watch('src/scripts/**/*.ts', ['eslint']);
 	gulp.watch('src/scripts/**/*.ts', ['scripts']);
 	gulp.watch('*.html', ['styles']);
 }
